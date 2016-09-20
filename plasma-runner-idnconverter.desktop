@@ -1,0 +1,14 @@
+[Desktop Entry]
+Name=IDN Converter
+Comment=Converter for internationalized domain names
+X-KDE-ServiceTypes=Plasma/Runner
+Type=Service
+Icon=preferences-desktop-font
+X-KDE-Library=krunner_idnconverter
+X-KDE-PluginInfo-Author=Laimonas Selenis
+X-KDE-PluginInfo-Email=user@example.com
+X-KDE-PluginInfo-Name=idnconverter
+X-KDE-PluginInfo-Version=0.0.1
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-EnabledByDefault=true
+X-Plasma-AdvertiseSingleRunnerQueryMode=true
