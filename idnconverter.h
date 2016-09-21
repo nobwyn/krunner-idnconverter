@@ -1,23 +1,24 @@
 
-#ifndef RUNNER_IDNCONV_H
-#define RUNNER_IDNCONV_H
+#ifndef IDNCONVERTER_H
+#define IDNCONVERTER_H
 
-#include <KRunner/AbstractRunner>
+#include <qt5/QtCore/QObject>
+#include <qt5/QtCore/QString>
 #include <unicode/idna.h>
 
-class IdnConverter : public Plasma::AbstractRunner
+class IdnConverter : public QObject
 {
 	Q_OBJECT
 
 public:
-	IdnConverter(QObject *parent, const QVariantList &args);
+	IdnConverter();
 	~IdnConverter();
-
-	void match(Plasma::RunnerContext &);
-	void run(const Plasma::RunnerContext &, const Plasma::QueryMatch &);
-   
-private:
-	icu::IDNA *idna;
+	QString convertToAce(const QString &);
+	QString convertToIdn(const QString &);
+	
+private: 
+	icu::IDNA *idnaConv;
+	QString buildResult(const icu::UnicodeString &, const icu::IDNAInfo &, const UErrorCode &);
 	
 };
 

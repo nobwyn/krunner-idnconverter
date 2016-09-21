@@ -15,7 +15,7 @@ include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 
 set(krunner_idnconverter_SRCS
-    idnconverter.cpp
+    idnconverterrunner.cpp idnconverter.cpp
 )
 
 add_library(krunner_idnconverter MODULE ${krunner_idnconverter_SRCS})
