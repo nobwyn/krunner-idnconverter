@@ -5,8 +5,6 @@
 #include <KLocalizedString>
 #include <QApplication>
 #include <QClipboard>
-#include <stdio.h>
-#include <stdlib.h>
 #include <unicode/idna.h>
 #include <unicode/unistr.h>
 #include <QDebug>
