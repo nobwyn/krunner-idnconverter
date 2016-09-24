@@ -29,6 +29,10 @@ IdnConverterRunner::IdnConverterRunner(QObject *parent, const QVariantList &args
 		)
 	);
 	
+	// regexp for domain name detection
+	domainNamePattern = QRegExp("\\w([\\w-]*\\w)?\\.\\w([\\w-]*\\w)?");
+	
+	// converter for 
 	idnConv = new IdnConverter();
 }
 
@@ -37,60 +41,60 @@ IdnConverterRunner::~IdnConverterRunner()
 	delete idnConv;
 }
 
-/**
- */
 void IdnConverterRunner::match(Plasma::RunnerContext &context)
 {
 	if (!context.isValid()) {
 		return;
 	}
 
-	const QString enteredKey = context.query();
-	qDebug() << "Got query: [" << enteredKey << "]";
-	
-	QString domainName;
-	if (enteredKey.startsWith("idn")) {
-		domainName = enteredKey.mid(4);
-	} else if (enteredKey.startsWith("xn--")) {
-		domainName = enteredKey;
-	} else {
-		return;
-	}
-	
-	qDebug() << "Got domain: [" << domainName << "]";
+	const QString keyword = context.query();
+	qDebug() << "Got query: [" << keyword << "]";
 	
 	QList<Plasma::QueryMatch> matches;
-	if (domainName.startsWith("xn--")) {
-		matches.append(buildMatch("IDN", idnConv->convertToIdn(domainName)));
-		matches.append(buildMatch("ACE", domainName));
+	if (isAceDomain(keyword)) {
+		qDebug() << "Matched ACE!";
+
+		matches.append(buildMatch("IDN", idnConv->convertToIdn(keyword), 1.0));
+		matches.append(buildMatch("ACE", keyword, 0.5));
+		
+	} else if (isIdnDomain(keyword)) {
+		qDebug() << "Matched IDN!";
+
+		matches.append(buildMatch("ACE", idnConv->convertToAce(keyword), 1.0));
+		matches.append(buildMatch("IDN", keyword, 0.5));
+		
 	} else {
-		matches.append(buildMatch("ACE", idnConv->convertToAce(domainName)));
-		matches.append(buildMatch("IDN", domainName));
+		return;
 	}
 	
 	// Pass the framework the results
 	context.addMatches(matches);
 }
 
-/**
- */
 void IdnConverterRunner::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
 {
 	Q_UNUSED(context);
-
-	// copy the selection to clipboard
 	QApplication::clipboard()->setText(match.subtext());
 }
 
-/**
- */
-Plasma::QueryMatch IdnConverterRunner::buildMatch(const QString &prefix, const QString &domainName)
+bool IdnConverterRunner::isAceDomain(const QString &keyword)
+{
+	return keyword.startsWith("xn--", Qt::CaseSensitivity::CaseInsensitive);
+}
+
+bool IdnConverterRunner::isIdnDomain(const QString &keyword)
+{
+	return keyword.indexOf(domainNamePattern) != -1;
+}
+
+Plasma::QueryMatch IdnConverterRunner::buildMatch(const QString &prefix, const QString &domainName, const qreal relevance)
 {
 	Plasma::QueryMatch match(this);
 	match.setIcon(QIcon::fromTheme("klipper"));
 	match.setType(Plasma::QueryMatch::ExactMatch);
 	match.setText(prefix + ": " + domainName);
 	match.setSubtext(domainName);
+	match.setRelevance(relevance);
 	
 	return match;
 }
