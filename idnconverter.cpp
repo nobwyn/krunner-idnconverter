@@ -41,10 +41,10 @@ QString IdnConverter::convertToIdn(const QString &domainName)
 	return buildResult(target, info, errCode);
 }
 
-QString IdnConverter::buildResult(const icu::UnicodeString &target, const icu::IDNAInfo &info, const UErrorCode &errCode)
+QString IdnConverter::buildResult(const icu::UnicodeString &text, const icu::IDNAInfo &info, const UErrorCode &errCode)
 {
 	if (U_FAILURE(errCode) || info.hasErrors()) {
 		return QString("");
 	}
-	return QString((QChar*) target.getBuffer(), target.length());
+	return QString((QChar*) text.getBuffer(), text.length());
 }
