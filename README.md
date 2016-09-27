@@ -1,4 +1,4 @@
-# KRunner IDN Converter
+# Krunner IDN Converter
 
 A small Krunner plugin (Plasma 5) for converting domain names between IDN and ACE formats.
 
