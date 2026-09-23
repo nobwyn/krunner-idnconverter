@@ -1,0 +1,17 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "8455481+nobwyn@users.noreply.github.com",
+                "Name": "nobwyn"
+            }
+        ],
+        "Description": "Converter for internationalized domain names",
+        "EnabledByDefault": true,
+        "Icon": "preferences-desktop-font",
+        "License": "MIT",
+        "Name": "IDN Converter",
+        "Version": "0.1.0"
+    },
+    "X-Plasma-AdvertiseSingleRunnerQueryMode": true
+}

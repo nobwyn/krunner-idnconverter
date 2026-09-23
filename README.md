@@ -1,6 +1,6 @@
 # Krunner IDN Converter
 
-A small Krunner plugin (Plasma 5) for converting domain names between IDN and ACE formats.
+A small KRunner plugin (Plasma 6) for converting domain names between IDN and ACE formats.
 
 ## Usage
 
@@ -13,15 +13,21 @@ Hitting ENTER will copy the selected format to the clipboard.
 
 ## Installation
 
-Make sure you have the [ICU library](http://www.icu-project.org/) installed on your machine.
+Requirements: CMake, Extra CMake Modules, Qt 6, KDE Frameworks 6 (KRunner, KI18n) and the [ICU library](https://icu.unicode.org/).
 
-Run the build script: `build.sh`
+Build and install:
 
-On success - run the `install.sh` to install the plugin (you'll be asked for a password to install it on the system).
+```sh
+cmake -B build -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+cmake --build build
+sudo cmake --install build
+```
 
-Restart the Krunner: `kquitapp5 krunner && krunner &`
+Run the tests (optional): `ctest --test-dir build`
 
-Make sure the new plugin is enabled in Krunner settings and you're ready to go!
+Restart KRunner: `kquitapp6 krunner`. It starts again the next time you open it.
+
+Make sure the new plugin is enabled in the KRunner settings and you're ready to go!
 
 ## License
 

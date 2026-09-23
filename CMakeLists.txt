@@ -1,29 +1,26 @@
-cmake_minimum_required(VERSION 2.8.12)
-project(RunnerIdnConverter)
+cmake_minimum_required(VERSION 3.20)
+project(krunner-idnconverter VERSION 0.1.0)
 
-find_package(ECM 5.12.0 REQUIRED NO_MODULE)
-set(CMAKE_MODULE_PATH
-     ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}
-)
+set(QT_MIN_VERSION "6.6.0")
+set(KF_MIN_VERSION "6.0.0")
 
-find_package(Qt5 ${QT_MIN_VERSION} REQUIRED CONFIG COMPONENTS Widgets Core Quick)
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS I18n Service Runner TextWidgets PlasmaQuick)
-find_package(ICU 57.1 COMPONENTS io i18n REQUIRED)
+find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
+include(FeatureSummary)
 
-set(krunner_idnconverter_SRCS
-    idnconverterrunner.cpp idnconverter.cpp
-)
+find_package(Qt6 ${QT_MIN_VERSION} REQUIRED CONFIG COMPONENTS Core Gui)
+find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS Runner I18n)
+find_package(ICU REQUIRED COMPONENTS uc)
 
-add_library(krunner_idnconverter MODULE ${krunner_idnconverter_SRCS})
-target_link_libraries(krunner_idnconverter KF5::Runner Qt5::Widgets
-                      KF5::I18n
-                      KF5::Service
-                      KF5::Plasma
-                      ICU::ICU)
-                      
-install(TARGETS krunner_idnconverter DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES plasma-runner-idnconverter.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+add_subdirectory(src)
+
+if(BUILD_TESTING)
+    find_package(Qt6 ${QT_MIN_VERSION} REQUIRED CONFIG COMPONENTS Test)
+    add_subdirectory(autotests)
+endif()
+
+feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
