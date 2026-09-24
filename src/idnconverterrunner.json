@@ -6,12 +6,13 @@
                 "Name": "nobwyn"
             }
         ],
-        "Description": "Converter for internationalized domain names",
+        "Description": "Converts internationalized domain names to and from Punycode (ACE)",
         "EnabledByDefault": true,
-        "Icon": "preferences-desktop-font",
+        "Icon": "krunner_idnconverter",
         "License": "MIT",
         "Name": "IDN Converter",
-        "Version": "0.1.0"
+        "Version": "0.1.0",
+        "Website": "https://github.com/nobwyn/krunner-idnconverter"
     },
     "X-Plasma-AdvertiseSingleRunnerQueryMode": true
 }

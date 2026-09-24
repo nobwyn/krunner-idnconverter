@@ -8,3 +8,5 @@ target_link_libraries(krunner_idnconverter
     KF6::I18n
     ICU::uc
 )
+
+ecm_install_icons(ICONS icons/sc-apps-krunner_idnconverter.svg DESTINATION ${KDE_INSTALL_ICONDIR})

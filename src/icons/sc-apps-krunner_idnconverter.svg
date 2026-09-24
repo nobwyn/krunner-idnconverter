@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <rect x="1.5" y="1.5" width="29" height="29" rx="3.5" fill="#2980b9" stroke="#7f8c8d" stroke-width="1"/>
+  <g fill="#ffffff" fill-rule="evenodd">
+    <!-- I -->
+    <path d="M6 4H13V7H11V11H13V14H6V11H8V7H6Z"/>
+    <!-- D -->
+    <path d="M17 4H23Q27 4 27 8V10Q27 14 23 14H17ZM20 7V11H23Q24 11 24 10V8Q24 7 23 7Z"/>
+    <!-- N -->
+    <path d="M5 28V18H8L11 23V18H14V28H11L8 23V28Z"/>
+    <!-- A -->
+    <path d="M17 28L20.4 18H23.6L27 28H24.1L23.5 26H20.5L19.9 28ZM21.2 23.5H22.8L22 20.9Z"/>
+  </g>
+</svg>

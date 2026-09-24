@@ -13,15 +13,15 @@ IdnConverterRunner::IdnConverterRunner(QObject *parent, const KPluginMetaData &m
 	, domainNamePattern(QStringLiteral("\\w([\\w-]*\\w)?\\.\\w([\\w-]*\\w)?"), QRegularExpression::UseUnicodePropertiesOption)
 {
 	addSyntax(
-		QStringLiteral("idn :q:"),
-		i18n("Converts the :q: to IDN/ACE formats. Pressing ENTER copies selected entry to the clipboard.")
+		QStringLiteral(":q:"),
+		i18n("Converts the domain name :q: between IDN and ACE (Punycode). Pressing Enter copies the selected entry to the clipboard.")
 	);
 	setMinLetterCount(3);
 }
 
 void IdnConverterRunner::match(KRunner::RunnerContext &context)
 {
-	const QString keyword = context.query();
+	const QString keyword = context.query().trimmed();
 
 	QList<KRunner::QueryMatch> matches;
 	if (isAceDomain(keyword)) {
@@ -67,7 +67,7 @@ bool IdnConverterRunner::isIdnDomain(const QString &keyword) const
 KRunner::QueryMatch IdnConverterRunner::buildMatch(const QString &prefix, const QString &domainName, const qreal relevance)
 {
 	KRunner::QueryMatch match(this);
-	match.setIconName(QStringLiteral("klipper"));
+	match.setIconName(QStringLiteral("krunner_idnconverter"));
 	match.setCategoryRelevance(KRunner::QueryMatch::CategoryRelevance::Highest);
 	match.setText(prefix + QLatin1String(": ") + domainName);
 	match.setSubtext(domainName);
