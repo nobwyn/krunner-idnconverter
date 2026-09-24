@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(krunner-idnconverter VERSION 0.1.0)
+project(krunner-idnconverter VERSION 0.2.0)
 
 set(QT_MIN_VERSION "6.6.0")
 set(KF_MIN_VERSION "6.0.0")

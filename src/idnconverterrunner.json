@@ -11,7 +11,7 @@
         "Icon": "krunner_idnconverter",
         "License": "MIT",
         "Name": "IDN Converter",
-        "Version": "0.1.0",
+        "Version": "0.2.0",
         "Website": "https://github.com/nobwyn/krunner-idnconverter"
     },
     "X-Plasma-AdvertiseSingleRunnerQueryMode": true
